@@ -229,7 +229,7 @@
                         <p align="center"><img width="554" height="316" src="project_wps13.jpg" /></p>
                         <div style="text-align: justify; line-height:20px;">
                       <div style="font-size:20px; margin:30px 0;"><strong>Other Forecasting Methods</strong></div>
-                      <div style="text-align: justify; line-height:20px;">So in this more interactive iteration of our project we included other forecasting methods to show the versatility of forecasting methods and to use as comparisons! </div>
+                      <div style="text-align: justify; line-height:20px;">So in this more interactive iteration of our project we included other forecasting methods to show the versatility of forecasting methods and to use as comparisons!</div>
                      <div style="font-size:18px; margin:20px 0;"><strong>Box-Cox Forecast</strong></div>
                       <div style="text-align: justify; line-height:20px;"><em >Box-Cox transformations</em> are generally used to transform non-normally distributed data to become approximately normal! Although we do not think this an appropriate transformation for our data set, it is still included in our analysis because it's a useful transformation to do especially since most real time data is not approximately <em >normally distributed</em>. <br />
                        <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">
@@ -244,7 +244,7 @@
                         &#9;forc_name = 'Box-Cox Transformation', <br />
                         &#9;ts_object_name = 'S&amp;P 500') 
                         </div>
-                        <p align="center"><img width="554" height="339" src="project_wps14.jpg" /></p>
+                        <p align="center"><img width="554" height="339" src="project_wps20.jpg" /></p>
                         The prediction shows a downward trend whereas the actual values show upward trend.</div>
                       <div style="font-size:18px; margin:20px 0;"><strong>Exponential Smoothing Forecast</strong></div>
                       <div style="text-align: justify; line-height:20px;">The following forecasting method is far more complex than the previous methods. This forecasting method relies on weighted averages of past observations where the most recent observations hold higher weight! Fortunately for us if we usethe ets function it outputs the method that best fits (much like the auto.arima() function) <br />
@@ -256,6 +256,7 @@
                         &#9;forc_name = 'Exponential Smoothing', <br />
                         &#9;ts_object_name = 'S&amp;P 500') 
                        </div>
+                       <p align="center"><img width="528" height="396" src="project_wps20.jpg" /></p>
                         Interesting that <em >Exponential Smoothing's</em> prediction is still within both prediction intervals, although the bands are noticeably larger than our <em >ARIMA</em>, it will be interesting to see more future predictions for this promising model. </div>
                      <div style="font-size:18px; margin:20px 0;"><strong>Mean Forecast</strong></div>
                       <div style="text-align: justify; line-height:20px;">For most of these forecasting methods they are best explained by Rob J. Hydnman (the man who created most of these time series packages) I will just be iterating what he has already said for simple forecasting methods found <a href="https://www.otexts.org/fpp/2/3" >here</a>. <br />
@@ -267,6 +268,8 @@
                         &#9;forc_name = 'Mean', <br />
                         &#9;ts_object_name = 'S&amp;P 500') 
                         </div>
+                        
+                         <p align="center"><img width="528" height="396" src="project_wps19.jpg" /></p>
                         As we can see due to the non-stationarity and volatility of our data this model performs very poorly. </div>
                      <div style="font-size:18px; margin:20px 0;"><strong>Naive Forecast</strong></div>
                       <div style="text-align: justify; line-height:20px;">
@@ -278,6 +281,7 @@
                         <strong>&#9;</strong><strong>forc_name = 'Naive Forecast',</strong><strong> </strong><br />
                         <strong>&#9;</strong><strong>ts_object_name = 'S&amp;P 500')</strong><strong> </strong>
                         </div></div>
+                         <p align="center"><img width="528" height="396" src="project_wps18.jpg" /></p>
                      <div style="font-size:18px; margin:20px 0;"><strong>Seasonal Naive Forecast</strong></div>
                       <div style="text-align: justify; line-height:20px;">For the snaive() method it follows the same principles as the <em >naive</em> method, but works better for very seasonal data! <br />
                       <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">
@@ -286,6 +290,7 @@
                         &#9;holdout = sp500_test, <br />
                         &#9;forc_name = 'Seasonal Naive', <br />
                         &#9;ts_object_name = 'S&amp;P 500') </div></div>
+                         <p align="center"><img width="528" height="396" src="project_wps17.jpg" /></p>
                      <div style="font-size:18px; margin:20px 0;"><strong>Neural Networks</strong></div>
                       <div style="text-align: justify; line-height:20px;">For neural networks in the context of time series, each lagged value can be thought of as an input for the network (more specifically a <em >feedforward neural network</em>). Our model produced was a <strong>NNAR(2, 1, 2)</strong><a href="https://www.inertia7.com/projects/8" ><strong>12</strong></a>, which has 3 inputs including a seasonal input with 2 hidden layers. Important to note that models can sometimes be translated to ARIMA equivalents, but don't have restrictions on parameters to ensure stationarity (for more information <a href="https://www.otexts.org/fpp/9/3" >see here</a>). <br />
                         Now we plot: <br />
@@ -295,6 +300,9 @@
                         &#9;holdout = sp500_test, <br />
                         &#9;forc_name = 'Neural Networks', <br />
                         &#9;ts_object_name = 'S&amp;P 500') </div></div>
+                        
+                         <p align="center"><img width="528" height="396" src="project_wps16.jpg" /></p>
+                        
                      <div style="font-size:20px; margin:30px 0;"><strong>Conclusions</strong></div>
                       <div style="text-align: justify; line-height:20px;">The forecasting method we use to find the best model is recieving the lowest <em >MAE</em> and <em >MAPE</em> as described by <strong>Rob J. Hyndman</strong> <a href="https://www.otexts.org/fpp/2/5" >here</a> <br />
                         We run the accuracy function on all the forecast methods and we check which performed best! <br />
