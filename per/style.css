@@ -1,0 +1,254 @@
+body {
+  font-family: tahoma,helvetica,arial,sans-serif;
+  text-align: center;
+  color: #6f6f6f;
+}
+html, body, #wrapper, h1, #nav, #nav ul, #nav li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  list-style-image: none;
+  list-style-position: outside;
+}
+body, th, td {
+  font-size: 10px;
+}
+img {
+  border:  none;
+}
+#wrapper {
+  margin: 16px auto;
+  text-align: left;
+  position: relative;
+}
+h1, h2, h3 {
+  font-size: 12px;
+}
+h1 {
+  margin: 0;
+  padding: 0;
+}
+h2 {
+  margin: 0 0 5px;
+  padding: 0;
+}
+h3 {
+  padding: 4px 0 0;
+}
+p {
+  margin: 1em 0;
+  padding: 0;
+}
+.block {
+  display: block;
+}
+.clear {
+  clear: both;
+  height: 1px;
+  padding-top: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1px;
+  line-height: 1px;
+}
+* html .clear {
+  margin-top: -5px;
+  margin-bottom: -4px;
+}
+.left {
+  margin: 1px 12px 0px 0px;
+  float: left;
+}
+.softright {
+  text-align: right;
+}
+body {
+  background: #373839 none repeat scroll 0% 50%;
+  padding-bottom: 12px;
+}
+#wrapper {
+  width: 658px;
+}
+h1 {
+  margin-bottom: 2px;
+}
+a {
+  color: #f5f5f5;
+}
+a:hover {
+  text-decoration: none;
+}
+#nav {
+  position: absolute;
+  top: 15px;
+  right: 0;
+  width: 46em;
+}
+#nav li {
+  margin: 0 6px;
+  padding: 0;
+  float: left;
+}
+#nav li.b{  width: 8em;}
+#nav li.a{  width: 16em;}
+#nav li.e{  width: 8em;}
+#nav li.c{  width: 9em;}
+#nav a {
+  padding: 4px 0;
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+#nav a:hover {
+  text-decoration: underline;
+}
+#nav li.a {
+  background: transparent url(images/menu_a_bg.gif) no-repeat scroll 0% 50%;
+}
+#nav li.a a {
+  background: transparent url(images/menu_a_r.gif) no-repeat scroll right top;
+}
+#nav li.b {
+  background: transparent url(images/menu_b_bg.gif) no-repeat scroll 0% 50%;
+}
+#nav li.b a {
+  background: transparent url(images/menu_b_r.gif) no-repeat scroll right top;
+}
+#nav li.c {
+  background: transparent url(images/menu_c_bg.gif) no-repeat scroll 0% 50%;
+}
+#nav li.c a {
+  background: transparent url(images/menu_c_r.gif) no-repeat scroll right top;
+}
+#nav li.d {
+  background: transparent url(images/menu_d_bg.gif) no-repeat scroll 0% 50%;
+}
+#nav li.d a {
+  background: transparent url(images/menu_d_r.gif) no-repeat scroll right top;
+}
+#nav li.e {
+  background: transparent url(images/menu_e_bg.gif) no-repeat scroll 0% 50%;
+}
+#nav li.e a {
+  background: transparent url(images/menu_e_r.gif) no-repeat scroll right top;
+}
+#body {
+  width: 100%;
+}
+#body {
+  background: #ed8601 url(images/body_bg.gif) repeat scroll 0% 50%;
+}
+#body div {
+  background: transparent url(images/body_tl.gif) no-repeat scroll left top;
+}
+#body div div {
+  background: transparent url(images/body_tr.gif) no-repeat scroll right top;
+}
+#body div div div {
+  background: transparent url(images/body_bl.gif) no-repeat scroll left bottom;
+}
+#body div div div div {
+  background: transparent url(images/body_br.gif) no-repeat scroll right bottom;
+}
+#body .inner div {
+  background: transparent none repeat scroll 0% 50%;
+}
+#body .inner {
+  padding: 18px 20px;
+  color: white;
+}
+#body h2 {
+  margin-top: 3px;
+  text-indent: -3px;
+}
+* html #body h2 {
+  margin-top: 3px;
+}
+#body p {
+  margin: 1em 0;
+}
+#body #dividerx {
+  margin: 0 1em;
+  padding: 12px 0;
+  background: transparent url(images/divider_h.gif) repeat-x scroll 12px 50%;
+  clear: both;
+}
+* html #boxes, * html #boxes .inner {
+  width: 100%;
+}
+* html #body #boxes #left .inner {
+  width: 90%;
+}
+* html #body #boxes #right .inner {
+  width: 95%;
+}
+#body #boxes {
+  background: transparent url(images/box_bg.gif) repeat-y scroll 0% 50%;
+}
+#body #boxes div {
+  background: transparent url(images/box_t.gif) no-repeat scroll left top;
+}
+#body #boxes div div {
+  background: transparent url(images/box_b.gif) no-repeat scroll left bottom;
+}
+#body #boxes .inner div {
+  background: transparent none repeat scroll 0% 50%;
+}
+#body #boxes .inner {
+  padding: 0;
+  color: white;
+}
+#left {
+  float: left;
+  width: 194px;
+}
+#right {
+  float: right;
+  width: 404px;
+}
+#body #boxes #left .inner, #body #boxes #right .inner {
+  padding: 10px 11px 0px;
+}
+#boxes ul {
+  margin: 0;
+  padding: 0;
+}
+* html #boxes ul {
+  margin-left: 0em;
+}
+li {
+  margin: 10px 1.8em 10px 0.1em;
+  padding: 0;
+
+  list-style-image: none;
+  list-style-position: outside;
+}
+a {
+  font-weight: bold;
+}
+#left .lowright {
+  margin: 0 0 0 1em;
+  float: right;
+  display: inline;
+}
+* html #left .lowright {
+  margin-bottom: -5px;
+}
+#footer {
+  margin-top: 3px;
+  text-align: center;
+}
+#footer, #footer a {
+  font-weight: normal;
+  font-size: 9px;
+  color: #989994;
+}
+#footer a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+.project-detail-custom {
+    padding-top: 50px;
+}

@@ -1,0 +1,341 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Zimu Lin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+<div id="wrapper">
+    <h1><img style="border: 0px solid ; width: 220px; height: 40px;" alt="Zimu Lin" src="images/logo.png" /></h1>
+    <ul id="nav">
+      <li class="b"><a href="index.html">Home</a></li>
+      <li class="a"><a href="inter.html">Internship & Competition</a></li>
+      <li class="e"><a href="project.html">Project</a></li>
+      <li class="c"><a href="re.html">Reasearch</a></li>
+    </ul>
+    <div id="body">
+   		<div>
+            <div>
+                <div>
+                    <div class="inner">
+                        <div style="font-size:20px;"><strong>Forecasting the <a name="OLE_LINK1" id="OLE_LINK1" >Gold and Bitcoin Price</a> (R)</strong><strong> </strong></div>
+                        <div style="font-size:16px; margin:10px 0;"><strong >Quantitative trading, Time series analysis, Forecasting model, ARIMA model</strong><strong > </strong></div>
+                        <div style="font-size:18px; margin:20px 0;"><strong>Abstract</strong></div>
+                        <div style="text-align: justify; line-height:20px;">This project focuses on finding the best investment model for traders to predict gold and bitcoin price. Besides, I publish the article on IJISM, and I&rsquo;m the first author. <br />
+                        We introduce the ARIMA model to predict the prices of gold and bitcoin in the next three days while considering the influence of time factors, and select some other prediction models to compare with the performance of the ARIMA model to explore our time series prediction method is good, which also shows that the model can be used as a reference investment model for traders. <br />
+                        Time-series analysis is a basic concept within the field of statistical-learning, which is appropriate for the analysis of the <strong>Gold and Bitcoin Price.</strong><strong> </strong>And for this project we leverage the horse-power of RStudio and deliver. <br />
+                        </div>
+                        <div style="font-size:18px; margin:20px 0;"><strong>Load Packages</strong></div>
+                        <div style="text-align: justify; line-height:20px;">
+                        This project has changed since its creation, for the current structure we include the additional packages inside the helper_functions script. <br />
+                        Along with the use of the packrat package as a version controller, which removes the need to manually install each package used in this project. <br />
+                        Within the helper_functions script we call library() method and include the package names as arguments. <br />
+                        </div>
+                        <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">
+                            <p># LOAD YOUR PACKAGES </p>
+                            <p>library(ggplot2) <br />
+                            library(forecast) <br />
+                            library(plotly) <br />
+                            library(ggfortify) <br />
+                            library(tseries) <br />
+                            library(gridExtra) <br />
+                            library(docstring) <br />
+                            library(readr) </p>
+                        </div>
+                        <div style="font-size:18px; margin:20px 0;"><strong>Here Package</strong></div>
+                        <div style="text-align: justify; line-height:20px;">
+                            Utilizing the here package, the here() function will make the main directory accessible to easily navigate the project directory. <br />
+                            <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">
+                            library(here) <br />
+                            here() <br />
+                            </div>
+                        </div>
+                        <div style="text-align: justify; line-height:20px;">
+                        We After cleaning the dataset to remove missing values and some outliers, we divide the dataset into training set and test set. The training set uses the daily gold settlement price in the United States from January 2, 2008 to May 16, 2018, a total of 2290 days, and the daily bitcoin settlement price data from April 28, 2013 to August 14, 2018 . The test set is valid from September 11, 2018 to September 10, 2021.encourage you to do a quick search on each of these packages to gain context on what they are useful for, and why we are using them here. Pay special attention to the packages forecast.<strong> </strong>
+                        </div>
+                        <div style="font-size:20px; margin:30px 0;">Get Data</strong></div>
+                        <div style="text-align: justify; line-height:20px;">After cleaning the dataset to remove missing values and some outliers, we divide the dataset into training set and test set. The training set uses the daily gold settlement price in the United States from January 2, 2008 to May 16, 2018, a total of 2290 days, and the daily bitcoin settlement price data from April 28, 2013 to August 14, 2018 . The test set is valid from September 11, 2018 to September 10, 2021. <br />
+                        Table. 1. Partial data display 
+                        </div>
+                     	<br />
+                        <br />
+                        <table border="1" cellspacing="0" align="center" >
+                          <tr >
+                            <td width="130" valign="center" ><br />
+                              Date </td>
+                            <td width="107" valign="center" ><p >Gold USD (PM) </p></td>
+                            <td width="99" valign="center" ><p >Date </p></td>
+                            <td width="115" valign="center" ><p >Bitcoin Value </p></td>
+                          </tr>
+                          <tr>
+                            <td width="130" valign="center" ><p >2008/1/17 </p></td>
+                            <td width="107" valign="center" ><p >1270.95 </p></td>
+                            <td width="99" valign="center" ><p >2013/4/16 </p></td>
+                            <td width="115" valign="center" ><p >762.97 </p></td>
+                          </tr>
+                          <tr>
+                            <td width="130" valign="center" ><p >2008/1/18 </p></td>
+                            <td width="107" valign="center" ><p >1219 </p></td>
+                            <td width="99" valign="center" ><p >2013/4/17 </p></td>
+                            <td width="115" valign="center" ><p >11584.83 </p></td>
+                          </tr>
+                          <tr>
+                            <td width="130" valign="center" ><p >2008/1/19 </p></td>
+                            <td width="107" valign="center" ><p >1406.8 </p></td>
+                            <td width="99" valign="center" ><p >2013/4/18 </p></td>
+                            <td width="115" valign="center" ><p >3961.493333 </p></td>
+                          </tr>
+                          <tr>
+                            <td width="130" valign="center" ><p >2008/2/17 </p></td>
+                            <td width="107" valign="center" ><p >1269.6 </p></td>
+                            <td width="99" valign="center" ><p >2013/4/19 </p></td>
+                            <td width="115" valign="center" ><p >7296.77 </p></td>
+                          </tr>
+                          <tr>
+                            <td width="130" valign="center" ><p >2008/2/18 </p></td>
+                            <td width="107" valign="center" ><p >1215.45 </p></td>
+                            <td width="99" valign="center" ><p >2013/4/20 </p></td>
+                            <td width="115" valign="center" ><p >19454.54 </p></td>
+                          </tr>
+                        </table>
+                      <br /><br />
+                         <div style="text-align: justify; line-height:20px;">Furthermore, to remove the dimensional effect between prices, we normalize the data to account for comparability between data. We use today&rsquo;s price divided by yesterday&rsquo;s price instead of today&rsquo;s price for subsequent forecasts. </div>
+                         <div style="font-size:18px; margin:20px 0;"><strong>Loading Data</strong></div>
+                         <div style="text-align: justify; line-height:20px;">
+                            Then we must include our data set within our working R environment. For this we use: <br />
+                            <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">
+                            data_hj &lt;- read.csv(here(&quot;data&quot;, &quot;LBMA-GOLD.csv&quot;)) <br />
+                            # Within the github repo the file `BCHAIN-MKPRU` <br />
+                            # is inside the data folder <br />
+                            # Using `here` will notify R to go to: <br />
+                            # `C:/Users/86135/Documents/data/BCHAIN-MKPRU.csv` <br />
+                            </div>
+                            Now we can call our Bitcoin Price data by typing data_hj$USD into our terminal. 
+                         </div>
+                        <div style="font-size:20px; margin:30px 0;">Exploratory Analysis</strong></div>
+                     <div style="text-align: justify; line-height:20px;">Now we want to get a feel for our data to get an intuition about the models that may be appropriate for our forecast. For this, we plot our data and diagnose for <em >trend</em>, <em >seasonality</em>, <em >heteroskedasticity</em>, and <em >stationarity</em>. We go over these concepts in further detail in this section. </div>
+                     <div style="font-size:18px; margin:20px 0;">Creating time-series data object</strong></div>
+                      <div style="text-align: justify; line-height:20px;">Our data is in the form of time-series; this means that our data exists over a continuous time interval with equal spacing between every two consecutive measurements. In <strong>R</strong> we are able to create time-series objects for our data vectors using the ts() method. For this, we select the vector we would like to use as the first argument, and tune the start and freq (frequency) parameters. Then we output the time-series data to the terminal by calling our newly-created time-series object. <br />
+                        <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">USD&lt;- ts(data_hj$USD, start=c(2016, 10), freq=365) </div>
+                        Here we use our function called plot_time_series, which does as its name suggests: <br />
+                       <div style="background:#000; color:#fff; padding:10px; margin:15px 0;"> plot.ts(USD)</div>
+                        Before we begin any analysis, we will be splitting the data to remove 2015 to use as our test set. <br />
+                        <p align="center"><img width="554" height="336" src="project_wps1.jpg" /></p>&nbsp;<br />
+                      <div style="background:#000; color:#fff; padding:10px; margin:15px 0;"> Value_training &lt;- ts(USD, start=c(2016, 10), end=c(2021, 5), freq=365) <br />
+                        length(Value_training ) <br />
+                        Value_training <br />
+                        plot.ts(Value_training) </p>
+                        </div>
+                      <div style="font-size:16px; margin:15px 0;"><strong>Terminal Output</strong></div>
+                      <p align="center"><img width="554" height="340" src="project_wps2.jpg" /></p>
+                      <div style="font-size:18px; margin:20px 0;"><strong>Plotting our Time Series</strong></div>
+                     <div style="text-align: justify; line-height:20px;">Plotting the data is arguably the most critical step in the exploratory analysis phase (We chose to emphasize on the time series object that has intervals from <em >201</em><em >6</em> to <em >2021</em> , which we will explain later!). This enables us to make inferences about important components of the time-series data, such as <em >trend</em>, <em >seasonality</em>, <em >heteroskedasticity</em>, and <em >stationarity</em>. Here is a quick summary of each: </div>
+                      <ul>
+                        <li><strong>Trend</strong>: we say that a dataset has a trend when it has either a <em >long-term increase</em> or <em >decrease</em>. </li>
+                        <li><strong>Seasonality</strong>: we say that a dataset has seasonality when it has patterns that repeat over known, fixed periods of time (e.g. monthly, quarterly, yearly). </li>
+                        <li><strong>Heteroskedasticity</strong>: we say that a data is <em >heteroskedastic</em> when its variability is not constant (i.e. its variance increases or decreases as a function of the explanatory variable). </li>
+                        <li><strong>Stationarity</strong>: a stochastic process is called <em >stationary</em> if the mean and variance are constant (i.e. their joint distribution does not change over time). </li>
+                      </ul>
+                      <div style="font-size:18px; margin:20px 0;"><strong>Testing for Stationarity</strong><strong> </strong></div>
+                      <div style="text-align: justify; line-height:20px;">We will utilize a few statistical tests to test for stationarity. We must be weary of our model having a <em >unit root</em>, this will lead to non-stationary processes. <br />
+                        <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">Box.test(Value_training,lag=20,type=&quot;Ljung-Box&quot;) </div></div>
+                      <div style="font-size:16px; margin:15px 0;"><strong >Terminal Output</strong></div>
+                      <p align="center"><img width="463" height="104" src="project_wps3.jpg" /></p>
+                      <div style="text-align: justify; line-height:20px;">Now we will utilize the <strong>Augmented Dickey-Fuller Test</strong> for stationarity. The null hypothesis states that large p-values indicate non-stationarity and smaller p values indicate stationarity (We will be using <em >0.05</em> as our alpha value). <br />
+                        adf.test(Value_training) </div>
+                      <div style="font-size:16px; margin:15px 0;"><strong >Terminal Output</strong></div>
+                      <div style="text-align: justify; line-height:20px;">
+                      	<p align="center"><img width="475" height="125" src="project_wps4.jpg" /></p>
+                        We can see our p-value for the ADF test is relatively high, so we'll do some further visual inspection. But we know we will most likely have to difference our time series for stationarity. </div>
+                     <div style="font-size:18px; margin:20px 0;"><strong>Decomposing our time-series</strong></div>
+                     <div style="text-align: justify; line-height:20px;">Beyond understanding the <em >trend</em> of our time-series, we want to further understand the anatomy of our data. For this reason we break-down our time-series into its <em >seasonal component</em>, <em >trend</em>, and <em >residuals</em>. <br />
+                       <div style="background:#000; color:#fff; padding:10px; margin:15px 0;"> plot(decompose(Value_training))</div> 
+                        The trend line already shows us what we know and we can see that there might be some seasonality in our time series object. <br />
+                        <p align="center"><img width="554" height="343" src="project_wps5.jpg" /></p>
+                      </div>
+                     <div style="font-size:18px; margin:20px 0;"><strong>Seasonal Plot</strong></div>
+                      <div style="text-align: justify; line-height:20px;">We will investigate if there was enough seasonality to adjust our time series object for seasonality. The seasonal plot can provide a good visual of seasonality for time series objects. This can be best illustrated through a commonly used time series dataset: <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/AirPassengers.html" >AirPassenger</a> (which requires knowledge of <em >stationary</em> and <em >heteroskadasicty</em> to transform the data set appropriately). <br />
+                        But if you run the seasonal plot for this function, you can see it follows a certain season pattern. I provided the code right here but will not provide visuals since its not apart of this project. You can run it yourself to get a picture of what I'm saying </div>
+                     <div style="font-size:20px; margin:30px 0;"><strong>Model Estimation</strong></div>
+                     <div style="font-size:18px; margin:20px 0;"><strong>Diagnosing the ACF and PACF Plots of our Time-Series Object</strong></div>
+                      <div style="text-align: justify; line-height:20px;"><em >ACF</em> stands for &quot;autocorrelation function&quot; and <em >PACF</em> stands for &quot;partial autocorrelation function&quot;. The <em >ACF</em> and <em >PACF</em> diagnosis is employed over a time-series to determine the order for which we are going to create our model using <em >ARIMA</em> modeling. Loosely speaking, a time-series is <em >stationary</em> when its mean, variance, and <em >autocorrelation</em> remain constant over time. <br />
+                        These functions help us understand the correlation component of different data points at different time <em >lags</em>. <em >Lag</em> refers to the time difference between one observation and a previous observation in a dataset. Let's examine our plots! <br />
+                       <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">  # DIAGNOSING ACF AND PACF PLOTS <br />
+                        pacf(Value_training) <br /></div>
+                        <p align="center"><img width="32" height="32" src="project_wps6.png" /></p>
+                        <p align="center"><img width="554" height="339" src="project_wps7.jpg" /></p>
+                        When there is large autocorrelation within our lagged values, we see geometric decay in our plots, which is a huge indicator that we will have to take the difference of our time series object. </div>
+                      <div style="font-size:18px; margin:20px 0;"><strong>Transforming our data to adjust for non-stationary</strong></div>
+                     <div style="text-align: justify; line-height:20px;">From visual inspection of the time series object and the other graphs used for exploratory purposes we decided it is appropriate to difference our time series object to account for the <em >non-stationarity</em> and see how that fares! <br />
+                        A way to make a time-series <em >stationary</em> is to find the difference across its consecutive values. This helps stabilize the mean, thereby making the time-series object stationary. <br />
+                        For this we use the diff() method. <br />
+                        <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">tsDiff &lt;- diff(Value_training) </div>
+                        Next we plot our transformed time-series. <br />
+                       <div style="background:#000; color:#fff; padding:10px; margin:15px 0;"> plot.ts(tsDiff) </div>
+                        This plot suggests that our working data is stationary. We want to confirm this running an <em >ACF</em> and <em >PACF</em> diagnostics over this data to find our if we can proceed to estimating a model. <br />
+                        <p align="center"><img width="554" height="340" src="project_wps8.jpg" /></p>
+                      </div>
+                      <div style="font-size:18px; margin:20px 0;"><strong>Testing for Stationarity</strong></div>
+                      <div style="text-align: justify; line-height:20px;">We apply the same tests to our differenced time series object. </div>
+                        <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">Box.test(tsDiff, lag = 20, type = &quot;Ljung-Box&quot;) </div>
+                      <div style="text-align: justify; line-height:20px;">
+                      	<p align="center"><img width="409" height="102" src="project_wps9.jpg" /></p>
+                        Now let's use the ADF Test </div>
+                        <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">adf.test(tsDiff) </div>
+                      <div style="text-align: justify; line-height:20px;">
+                      	<p align="center"><img width="488" height="166" src="project_wps10.jpg" /></p>
+                        Upon reading this <a href="https://stats.stackexchange.com/questions/142003/adf-test-results-confusion" >stackoverflow</a> post over the cryptic warning message, we can see that the result yields a small p-value which makes us reject the null suggestion stationarity. </p>
+                      <div style="font-size:18px; margin:20px 0;"><strong>Seasonal Plot for Transformed Time Series Object</strong></div>
+                     <div style="text-align: justify; line-height:20px;">Now that we have a stationary time series object, we again make a seasonal plot which this time shows us that there is no indicative visual seasonal pattern provided by the following code: </div>
+                      <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">  plot_seasonal(tsDiff, 'First Difference of S&amp;P 500') </div>
+                      <div style="text-align: justify; line-height:20px;">  Just to reiterate, this plot shows us there is no clear seasonal pattern. Therefore, we can continue and assume that our differenced time series object meets the criteria for the <em >Box-Jenkins model</em> estimation. </div>
+                      <div style="font-size:20px; margin:30px 0;"><strong>Build Model</strong></div>
+                      <div style="text-align: justify; line-height:20px;">Our findings in the exploratory analysis phase suggest that model <em >ARIMA(0, 1, 1)</em> might be best fit. Fortunately, there is a function in <strong>R</strong> that we can use to test our findings. <br />
+                        The auto.arima() method, found within the forecast package, yields the best model for a time-series based on <strong>Akaike-Information-Criterion</strong> (<em >AIC</em>). The <em >AIC</em> is a measurement of quality used across various models to find the best fit. After running our original and differenced data sets through the auto.arima() method we confirmed that the <em >ARIMA(0, 1, 1)</em> is our best fit model. <br />
+                        We use the Arima() method to fit our model and include our training data set sp500_TR as the first argument. <br />
+                        <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">fit &lt;- Arima(Value_training, order = c(0,1,2), include.drift = TRUE) <br />
+                        summary(fit) </div>
+                        Here's the summary of our model (using the summary() method): <br />
+                        <p align="center"><img width="554" height="338" src="project_wps11.jpg" /></p>
+                       </div>
+                      <div style="font-size:16px; margin:15px 0;"><strong >Terminal Output</strong></div>
+                      <p align="center"><img width="554" height="239" src="project_wps12.jpg" />&nbsp;</p>
+                      <div style="font-size:20px; margin:30px 0;"><strong>Forecasting</strong></div>
+                      <div style="text-align: justify; line-height:20px;">We proceed to forecasting now that we believe we found the appropriate model! <br />
+                        We utilized the autoplot() function quite heavily on this iteration of our project, since we couldn't find a way of adding the actual values to the plot we used a workaround by borrowing <a href="http://librestats.com/2012/06/11/autoplot-graphical-methods-with-ggplot2/" >Drew Schmidt's</a> work to include the actual 2015 values. <br />
+                        <strong>UPDATE</strong>: For the current iteration on inertia7, we decided to iteratively update the test set, so for this demonstration we included 2015-2017. In the shiny dashboard we only included the original forecast range (only 2015). <br />
+                        For this we downloaded data for 2015-2017 and created our test set accordingly. <br />
+                       <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">
+                        sp500_TR= ts(Value_training) <br />
+                        sp500_test &lt;- read.csv(&quot;C:/Users/86135/Documents/data/LBMA-GOLD.csv&quot;) <br />
+                        sp500_test &lt;- ts(sp500_test$USD, <br />
+                        start = c(2021,6), end=c(2021,9), <br />
+                        frequency = 365) <br />
+                        sp500_test&lt;-c(52677.4000,46809.1700,46078.3800,46368.6900 ) 
+                        </div>
+                        Next we use the forecast function, ggplot2 and plotly to visualize the predictions for the year 2015! Here within the plots the forecasted values are <strong>BLUE</strong>, the actual 2015 values are in <strong>RED</strong>, the 80% Confidence Intervals are encompassed in the <strong>YELLOW</strong> bands and 95% <em >Confidence Intervals</em> are encompassed in the <strong>ORANGE</strong> bands respectively. <br />
+                        <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">
+                        for_sp500_all &lt;- forecast(fit, h = 4) <br />
+                        fore&lt;-forecast::forecast(fit,h=4) <br />
+                        fore <br />
+                        plot(fore,lty=2) <br />
+                        lines(fore$fitted,col=2)
+                     	</div>   
+                      </div>
+                      <div style="text-align: justify; line-height:20px;">We can see that the model performs well and within the 80% and 95% confidence intervals. You can forecast values even further into the future by tuning the appropriate parameters. Please not that this forecast project is for educational purposes and <strong>we do not recommend investing by using these predictions</strong> - remember that the stock market is very volatile. <br />
+                        <p align="center"><img width="554" height="316" src="project_wps13.jpg" /></p>
+                        <div style="text-align: justify; line-height:20px;">
+                      <div style="font-size:20px; margin:30px 0;"><strong>Other Forecasting Methods</strong></div>
+                      <div style="text-align: justify; line-height:20px;">So in this more interactive iteration of our project we included other forecasting methods to show the versatility of forecasting methods and to use as comparisons!</div>
+                     <div style="font-size:18px; margin:20px 0;"><strong>Box-Cox Forecast</strong></div>
+                      <div style="text-align: justify; line-height:20px;"><em >Box-Cox transformations</em> are generally used to transform non-normally distributed data to become approximately normal! Although we do not think this an appropriate transformation for our data set, it is still included in our analysis because it's a useful transformation to do especially since most real time data is not approximately <em >normally distributed</em>. <br />
+                       <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">
+                        lambda &lt;- BoxCox.lambda(sp500_TR) <br />
+                        fit_sp500_BC &lt;- ar(BoxCox(sp500_TR,lambda)) <br />
+                        fit_BC &lt;- forecast(fit_sp500_BC,h=4,lambda=lambda) 
+                        </div>
+                        Now that we have created the forecast object we plot the prediction! <br />
+                       <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">
+                        autoplot(fit_BC, <br />
+                        &#9;holdout = sp500_test, <br />
+                        &#9;forc_name = 'Box-Cox Transformation', <br />
+                        &#9;ts_object_name = 'S&amp;P 500') 
+                        </div>
+                        <p align="center"><img width="554" height="339" src="project_wps20.jpg" /></p>
+                        The prediction shows a downward trend whereas the actual values show upward trend.</div>
+                      <div style="font-size:18px; margin:20px 0;"><strong>Exponential Smoothing Forecast</strong></div>
+                      <div style="text-align: justify; line-height:20px;">The following forecasting method is far more complex than the previous methods. This forecasting method relies on weighted averages of past observations where the most recent observations hold higher weight! Fortunately for us if we usethe ets function it outputs the method that best fits (much like the auto.arima() function) <br />
+                        For those interested when outputting the summary for the ets model we receive that our model is <em >ETS(A, Ad, N)</em> which reading more of Hyndman's blog we see that it is equivalent to an <em >ARIMA(1, 1, 2)</em> interesting to know. <br />
+                        <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">
+                        fit_ets &lt;- forecast(ets(Value_training), h = 4) <br />
+                        autoplot(fit_ets, <br />
+                        &#9;holdout=sp500_test, <br />
+                        &#9;forc_name = 'Exponential Smoothing', <br />
+                        &#9;ts_object_name = 'S&amp;P 500') 
+                       </div>
+                       <p align="center"><img width="528" height="396" src="project_wps20.jpg" /></p>
+                        Interesting that <em >Exponential Smoothing's</em> prediction is still within both prediction intervals, although the bands are noticeably larger than our <em >ARIMA</em>, it will be interesting to see more future predictions for this promising model. </div>
+                     <div style="font-size:18px; margin:20px 0;"><strong>Mean Forecast</strong></div>
+                      <div style="text-align: justify; line-height:20px;">For most of these forecasting methods they are best explained by Rob J. Hydnman (the man who created most of these time series packages) I will just be iterating what he has already said for simple forecasting methods found <a href="https://www.otexts.org/fpp/2/3" >here</a>. <br />
+                        The forecasting methods are useful to keep in mind because you might conclude that your time series object might not even require some complex algorithm. We begin with the average method; with the meanf() function we are essenntially forecasting values based upon the mean of the historical data! <br />
+                       <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">
+                        fit_meanf &lt;- meanf(Value_training, h = 4) <br />
+                        autoplot(fit_meanf, <br />
+                        &#9;holdout = sp500_test, <br />
+                        &#9;forc_name = 'Mean', <br />
+                        &#9;ts_object_name = 'S&amp;P 500') 
+                        </div>
+                        
+                         <p align="center"><img width="528" height="396" src="project_wps19.jpg" /></p>
+                        As we can see due to the non-stationarity and volatility of our data this model performs very poorly. </div>
+                     <div style="font-size:18px; margin:20px 0;"><strong>Naive Forecast</strong></div>
+                      <div style="text-align: justify; line-height:20px;">
+                      The <em >naive forecasting</em> method returns an <em >ARIMA(0, 1, 0) with random walk</em> model that is applied to our time series object. Important to note that Hyndman described this forecasting method as being effective in financial time series objects, and that the forecasting method &quot;... all <a href="https://www.inertia7.com/projects/8" >...</a> values are set to be $$y_T$$, where $$y_T$$ is the last observed value&quot; <br />
+                       <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">
+                        <strong>fit_naive &lt;- naive(Value_training, h = 4)</strong><strong> </strong><br />
+                        <strong>autoplot(fit_naive, </strong><strong> </strong><br />
+                        <strong>&#9;</strong><strong>holdout = sp500_test,</strong><strong> </strong><br />
+                        <strong>&#9;</strong><strong>forc_name = 'Naive Forecast',</strong><strong> </strong><br />
+                        <strong>&#9;</strong><strong>ts_object_name = 'S&amp;P 500')</strong><strong> </strong>
+                        </div></div>
+                         <p align="center"><img width="528" height="396" src="project_wps18.jpg" /></p>
+                     <div style="font-size:18px; margin:20px 0;"><strong>Seasonal Naive Forecast</strong></div>
+                      <div style="text-align: justify; line-height:20px;">For the snaive() method it follows the same principles as the <em >naive</em> method, but works better for very seasonal data! <br />
+                      <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">
+                        fit_snaive &lt;- snaive(Value_training, h = 4) <br />
+                        autoplot(fit_snaive, <br />
+                        &#9;holdout = sp500_test, <br />
+                        &#9;forc_name = 'Seasonal Naive', <br />
+                        &#9;ts_object_name = 'S&amp;P 500') </div></div>
+                         <p align="center"><img width="528" height="396" src="project_wps17.jpg" /></p>
+                     <div style="font-size:18px; margin:20px 0;"><strong>Neural Networks</strong></div>
+                      <div style="text-align: justify; line-height:20px;">For neural networks in the context of time series, each lagged value can be thought of as an input for the network (more specifically a <em >feedforward neural network</em>). Our model produced was a <strong>NNAR(2, 1, 2)</strong><a href="https://www.inertia7.com/projects/8" ><strong>12</strong></a>, which has 3 inputs including a seasonal input with 2 hidden layers. Important to note that models can sometimes be translated to ARIMA equivalents, but don't have restrictions on parameters to ensure stationarity (for more information <a href="https://www.otexts.org/fpp/9/3" >see here</a>). <br />
+                        Now we plot: <br />
+                      <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">  fit_sp500_net &lt;- nnetar(Value_training, lambda = lambda) # Using BC lambda <br />
+                        fit_net &lt;- forecast(fit_sp500_net, h = 4, PI = TRUE) <br />
+                        autoplot(fit_net, <br />
+                        &#9;holdout = sp500_test, <br />
+                        &#9;forc_name = 'Neural Networks', <br />
+                        &#9;ts_object_name = 'S&amp;P 500') </div></div>
+                        
+                         <p align="center"><img width="528" height="396" src="project_wps16.jpg" /></p>
+                        
+                     <div style="font-size:20px; margin:30px 0;"><strong>Conclusions</strong></div>
+                      <div style="text-align: justify; line-height:20px;">The forecasting method we use to find the best model is recieving the lowest <em >MAE</em> and <em >MAPE</em> as described by <strong>Rob J. Hyndman</strong> <a href="https://www.otexts.org/fpp/2/5" >here</a> <br />
+                        We run the accuracy function on all the forecast methods and we check which performed best! <br />
+                     <div style="background:#000; color:#fff; padding:10px; margin:15px 0;">   round(accuracy(fit_arima, sp500_test), 3)&#9;&#9;&#9; <br />
+                        round(accuracy(fit_BC, sp500_test), 3) <br />
+                        round(accuracy(fit_ets, sp500_test), 3) <br />
+                        round(accuracy(fit_meanf, sp500_test), 3) <br />
+                        round(accuracy(fit_naive, sp500_test), 3) <br />
+                        round(accuracy(fit_snaive, sp500_test), 3) <br />
+                        round(accuracy(fit_net, sp500_test), 3) </div></div>
+                      <div style="font-size:16px; margin:15px 0;"><strong >Terminal Output</strong></div>
+                      <div style="text-align: justify; line-height:20px;">
+                      <p align="center"><img width="528" height="396" src="project_wps15.jpg" /></p>
+                        As we can see from our metrics relating to the 3 year test set, the <em >ARIMA</em> modeled performed better with <em >Exponential Smoothing</em> peforming well. Through the forecast plots however we saw that <em >Exponential Smoothing</em> is still within the prediction intervals, so its a close call. <br />
+                        We conclude that the <em >ARIMA</em> models performs best given that it's still inside the 95% prediction intervals and the accuracy metrics performed better than all other models. </div>
+                      <div style="font-size:18px; margin:20px 0;"><a name="OLE_LINK2" id="OLE_LINK2" ></a><strong>Citations for Packages Used in Project</strong></div>
+                      <div style="text-align: justify; line-height:20px;">
+                      Citations created using the function (in <strong>R</strong>): <br />
+                       <div style="background:#000; color:#fff; padding:10px; margin:15px 0;"> <a name="OLE_LINK4" id="OLE_LINK4" ></a>citation(&quot;packageName&quot;) </div></div>
+                      <ul>
+                        <li>Li Haohuo.Quantitative trading strategy design based on genetic programming algorithm [ D ].Shanghai Normal University, 2021. </li>
+                        <li>King. Short-term prediction of gold price based on ARIMA model [ J ]. Time Financial, 2016 ( 17 ) : 221-222. </li>
+                        <li>Duan Huan.Research on gold futures price prediction based on time series [ D ].Harbin University of Technology, 2021. </li>
+                        <li>Li Jing. Using BP neural network to build a bitcoin market forecasting model [ J ].Accounting Monthly, 2016 ( 21 ) : 33-36. </li>
+                        <li>[9]Xu Jingyi, Kong Mengqi. Research on the price of COMEX gold futures in New York based on ARIMA model [J].China, 2022(18):123-125. </li>
+                        <li>Mao Congqin.Gold price prediction analysis and mechanism research based on GARCH model [ D ].Suzhou University, 2016. </li>
+                        <li>Han Zhongming, Wang Yuhang, Mao Yajun, Chen Fuyu. Bitcoin trading prediction based on graph neural network [ J / OL ]. Computer application research : 1-8 [ 2022-10-27 ]. DOI : 10.19734. </li>
+                        <li>[4]Liu Chengjun, Yang Peng, Lv Wensheng, Huang Ping. Application of Grey-Markov Composite Model in Gold Price Forecasting [ J ].Nonferrous Metals ( Mining Part ), 2013,65 ( 01 ) : 7-11. </li>
+                      </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>        
+</body>
+</html>
